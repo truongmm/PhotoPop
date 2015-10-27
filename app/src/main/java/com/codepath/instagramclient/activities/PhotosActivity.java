@@ -66,36 +66,18 @@ public class PhotosActivity extends AppCompatActivity {
             // onSuccess (worked, 200)
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // Expecting a JSON object
-                // Iterate each of the photo items and decode the item into a java object
-                JSONArray photosJSON = null;
                 try {
-                    photosJSON = response.getJSONArray("data");
-                    // Iterate array of posts
-                    for (int i = 0; i<photosJSON.length(); i++) {
-                        // Get the json object at that position
-                        JSONObject photoJSON = photosJSON.getJSONObject(i);
-                        // Decode the attributes of the json into a data model
-                        Photo photo = new Photo();
-                        photo.type = photoJSON.getString("type");
-                        photo.username = photoJSON.getJSONObject("user").getString("username");
-                        photo.userImage = photoJSON.getJSONObject("user").getString("profile_picture");
-                        photo.caption = photoJSON.getJSONObject("caption").getString("text");
-                        photo.imageUrl = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getString("url");
-                        photo.imageHeight = photoJSON.getJSONObject("images").getJSONObject("standard_resolution").getInt("height");
-                        photo.likesCount = photoJSON.getJSONObject("likes").getInt("count");
-                        photos.add(photo);
-                    }
-                } catch (JSONException e) {
+                    JSONArray photosJSON = response.getJSONArray("data");
+                    ArrayList<Photo> photoModels = Photo.fromJSON(photosJSON);
+                    photos.addAll(photoModels);
+                    // Update items
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                // Update items
                 adapter.notifyDataSetChanged();
             }
 
             // onFailure
-
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 lvPhotos.setBackgroundResource(R.drawable.maintenance);
