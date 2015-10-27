@@ -16,6 +16,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class PhotosAdapter extends ArrayAdapter<Photo> {
+    // View lookup cache
+    private static class ViewHolder {
+        ImageView ivUser;
+        TextView tvUsername;
+        ImageView ivPhoto;
+        TextView tvLikes;
+        TextView tvCaption;
+    }
+
     public PhotosAdapter(Context context, ArrayList<Photo> objects) {
         super(context, 0, objects);
     }
@@ -23,26 +32,34 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Photo photo = getItem(position);
+        ViewHolder viewHolder; // view lookup cache stored in tag
+
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_photo, parent, false);
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            convertView = inflater.inflate(R.layout.item_photo, parent, false);
+            viewHolder.ivUser = (ImageView) convertView.findViewById(R.id.ivUser);
+            viewHolder.tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
+            viewHolder.ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
+            viewHolder.tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
+            viewHolder.tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
+            convertView.setTag(viewHolder);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        ImageView ivUser = (ImageView) convertView.findViewById(R.id.ivUser);
-        ivUser.setImageResource(0);
-        Picasso.with(getContext()).load(photo.userImage).transform(new CircleTransform()).into(ivUser);
+        viewHolder.ivUser.setImageResource(0);
+        Picasso.with(getContext()).load(photo.userImage).transform(new CircleTransform()).into(viewHolder.ivUser);
 
-        TextView tvUsername = (TextView) convertView.findViewById(R.id.tvUsername);
-        tvUsername.setText(photo.username);
+        viewHolder.tvUsername.setText(photo.username);
 
-        ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
-        ivPhoto.setImageResource(0);
-        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.loader).into(ivPhoto);
+        viewHolder.ivPhoto.setImageResource(0);
+        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.loader).into(viewHolder.ivPhoto);
 
-        TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
-        tvLikes.setText(photo.formattedLikesCount());
+        viewHolder.tvLikes.setText(photo.formattedLikesCount());
 
-        TextView tvCaption = (TextView) convertView.findViewById(R.id.tvCaption);
-        tvCaption.setText(photo.caption);
+        viewHolder.tvCaption.setText(photo.caption);
 
         return convertView;
     }
