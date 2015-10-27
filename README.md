@@ -19,6 +19,7 @@ The following **optional** features are implemented:
 
 * [x] For each photo displayed, user can see the following details: Like Count, User Profile Image
 * [x] Display a nice default placeholder graphic for each image during loading (read more about Picasso)
+* [x] Show message on network failure
 
 #### Video Walkthrough
 
@@ -35,5 +36,11 @@ User can scroll through current popular photos from Instagram.
 Display a nice default placeholder graphic for each image during loading (read more about Picasso).
 
 ![placeholder](https://cloud.githubusercontent.com/assets/5839078/10749379/fadffc62-7c26-11e5-8d9a-45e4482e30a3.gif)
+
+- - -
+
+Show "Under Maintenance" message on network failure.
+
+![maintenance](https://cloud.githubusercontent.com/assets/5839078/10750375/d48eefe0-7c31-11e5-83ac-e76ea52490f7.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).

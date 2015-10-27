@@ -1,5 +1,8 @@
 package com.codepath.instagramclient.activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -25,6 +28,7 @@ public class PhotosActivity extends AppCompatActivity {
     private static final String CLIENT_ID = "999e6d2598c2438a849d740fe42ff32e";
     private ArrayList<Photo> photos;
     private PhotosAdapter adapter;
+    private ListView lvPhotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +40,20 @@ public class PhotosActivity extends AppCompatActivity {
 
         // Create the adapter linking it to the source
         adapter = new PhotosAdapter(PhotosActivity.this, photos);
-        ListView lvPhotos = (ListView) findViewById(R.id.lvPhotos);
+        lvPhotos = (ListView) findViewById(R.id.lvPhotos);
         lvPhotos.setAdapter(adapter);
 
-        // Send out API request to Popular Photos
-        fetchPopularPhotos();
+        if (isNetworkAvailable())
+            fetchPopularPhotos();
+        else
+            lvPhotos.setBackgroundResource(R.drawable.maintenance);
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
     // Trigger API request
@@ -85,6 +98,7 @@ public class PhotosActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                lvPhotos.setBackgroundResource(R.drawable.maintenance);
             }
         });
     }
