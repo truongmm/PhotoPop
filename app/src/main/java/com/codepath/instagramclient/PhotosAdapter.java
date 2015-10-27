@@ -36,7 +36,7 @@ public class PhotosAdapter extends ArrayAdapter<Photo> {
 
         ImageView ivPhoto = (ImageView) convertView.findViewById(R.id.ivPhoto);
         ivPhoto.setImageResource(0);
-        Picasso.with(getContext()).load(photo.imageUrl).into(ivPhoto);
+        Picasso.with(getContext()).load(photo.imageUrl).placeholder(R.drawable.loader).into(ivPhoto);
 
         TextView tvLikes = (TextView) convertView.findViewById(R.id.tvLikes);
         tvLikes.setText(photo.formattedLikesCount());
