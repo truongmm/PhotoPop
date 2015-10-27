@@ -4,7 +4,7 @@ PhotoPop is an android app that allows you to view popular photos on Instagram.
 
 Submitted by: Melody Truong
 
-Time spent: 3 hours spent in total
+Time spent: 9 hours spent in total
 
 ## Required User Stories
 
@@ -18,7 +18,7 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 * [x] For each photo displayed, user can see the following details: Like Count, User Profile Image
-* [x] Display a nice default placeholder graphic for each image during loading (read more about Picasso)
+* [x] Display a nice default placeholder graphic for each image during loading
 * [x] Show message on network failure
 
 #### Video Walkthrough
@@ -33,7 +33,7 @@ User can scroll through current popular photos from Instagram.
 
 - - -
 
-Display a nice default placeholder graphic for each image during loading (read more about Picasso).
+Display a nice default placeholder graphic for each image during loading.
 
 ![placeholder](https://cloud.githubusercontent.com/assets/5839078/10749379/fadffc62-7c26-11e5-8d9a-45e4482e30a3.gif)
 
