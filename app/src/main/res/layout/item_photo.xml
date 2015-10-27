@@ -24,7 +24,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Username"
         android:id="@+id/tvUsername"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/ivUser"
@@ -33,7 +32,8 @@
         android:textSize="18sp"
         android:paddingTop="10dp"
         android:paddingBottom="15dp"
-        android:textColor="#606060" />
+        android:textColor="#606060"
+        android:hint="@string/username" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -67,7 +67,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Likes"
         android:id="@+id/tvLikes"
         android:layout_below="@+id/ivPhoto"
         android:layout_toRightOf="@+id/ivHeart"
@@ -75,13 +74,13 @@
         android:textSize="12sp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:hint="@string/likes" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Caption"
         android:id="@+id/tvCaption"
         android:layout_below="@+id/tvLikes"
         android:layout_alignParentLeft="true"
@@ -94,6 +93,7 @@
         android:paddingLeft="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
-        android:background="#FFFFFF" />
+        android:background="#FFFFFF"
+        android:hint="@string/caption" />
 
 </RelativeLayout>
